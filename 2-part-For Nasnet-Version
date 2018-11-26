@@ -31,7 +31,7 @@ lr           iter     epoch    | loss   top-1  top-2            | loss   top-1  
 0.00001000  13.5     13.0      | 0.098  97.937  99.365        | 0.181  95.624  97.848        |  0 hr 24 min
 
 
-1.  以下是  resnet 152 layers‘s results.
+2.  以下是  resnet 152 layers‘s results.
 
 
 ** start training here! **
