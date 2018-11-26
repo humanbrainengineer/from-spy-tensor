@@ -1,0 +1,59 @@
+来自： https://community.challenger.ai/tag/254
+开源一个baseline 线上0.8805
+源码地址：
+线上0.8805，线下0.8735左右
+https://github.com/spytensor/plants_disease_detection
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+以下对应pycharm 里的源文件夹. __> PycharmProjects/untitled/pytorch-image-classification-master/
+
+
+1.step.
+
+从 spytensor/plants_disease_detection 发现  http://spytensor.com  --- 已经保存  pdf
+转到:  github.com/spytensor/pytorch-image-classification
+
+
+download the clone of code.
+
+download the dataset:  已经保存到网盘.apacheindex
+
+2.step.
+  把  traffic-sign 解压  放到 dataset 里.
+  
+  dataset-》 traffic-sign --》 1. train -> 62 文件夹
+                               1.  test -> 62 文件夹
+                               
+                               
+3.
+  把  config.py file change to:
+  
+    #train_data = "../data/train/"
+    train_data = "./dataset/traffic-sign/train/"
+ 
+    #val_data = "./data/val/"
+    val_data = "./dataset/traffic-sign/test/"
+    
+    
+4. 
+
+    #gpus = "1"
+    gpus = "0"
+    
+    
+5.
+
+pip3 install torch torchvision
+install a series pakage via Pycharm software to meet all requirements.排错
+
+执行 main.py 文件.
+
+显示结果。
+
+
+OK！！
+
+
+  
