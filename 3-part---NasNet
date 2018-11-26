@@ -43,7 +43,7 @@ config.py-->
 
     img_height = 224
     img_weight = 224         
-    change o:
+    change to:
     img_height = 324
     img_weight = 324
     
