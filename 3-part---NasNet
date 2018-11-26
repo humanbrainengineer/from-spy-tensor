@@ -1,0 +1,67 @@
+1. pip3 install pretrainedmodels
+
+2. 在 pycharm install ： torch version
+
+3. 在 model.py, import pretrainedmodels
+
+    #model = torchvision.models.resnet152(pretrained=True)
+
+    change to : 
+    
+    model = pretrainedmodels.nasnetalarge(num_classes=1000,pretrained='imagenet')
+    
+    会自动加载nasnetalarge模型
+    
+    
+
+
+5.  
+Traceback (most recent call last):
+  File "/home/eth/PycharmProjects/untitled/pytorch-image-classification-master-NasNet-Vsersion/main.py", line 224, in <module>
+    main()
+  File "/home/eth/PycharmProjects/untitled/pytorch-image-classification-master-NasNet-Vsersion/main.py", line 200, in main
+    output = model(input)
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py", line 477, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/parallel/data_parallel.py", line 121, in forward
+    return self.module(*inputs[0], **kwargs[0])
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py", line 477, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/pretrainedmodels/models/nasnet.py", line 604, in forward
+    x = self.logits(x)
+  File "/usr/local/lib/python3.6/dist-packages/pretrainedmodels/models/nasnet.py", line 596, in logits
+    x = self.avg_pool(x)
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py", line 477, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/modules/pooling.py", line 547, in forward
+    self.padding, self.ceil_mode, self.count_include_pad)
+RuntimeError: Given input size: (4032x7x7). Calculated output size: (4032x-3x-3). Output size is too small at /pytorch/aten/src/THCUNN/generic/SpatialAveragePooling.cu:63
+
+出现以上错误，
+
+config.py-->
+
+    img_height = 224
+    img_weight = 224         
+    change o:
+    img_height = 324
+    img_weight = 324
+    
+    
+    
+From  :
+
+1: https://github.com/Randl/MobileNetV2-pytorch/issues/2
+Input size is assumed to be 224x224
+
+2: https://github.com/ajbrock/SMASH/issues/4
+You don't need to modify the input size, just change the pooling size on line 997 and line 1193 to be the appropriate size for your network. The current version is lazy and assumes a square image; if you replace out.size(2) with (out.size(2),out.size(3)) it should resolve the issue. I'll update the source when I get a chance to test it out and make the 0.20 update.
+
+
+3: https://github.com/creafz/pytorch-cnn-finetune/issues/4
+The problem is that some layers in a neural network (such as pooling layers or convolutions with stride > 1) reduce spatial dimensions of the activation map. So if the input image size is too small, you can't make a full forward pass through a network because activation map somewhere in the middle of the network will become too small.
+One possible solution to this problem is to increase the size of the input image (for example you can rescale it or pad image borders with zeros).
+
+
+
+
