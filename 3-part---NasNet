@@ -47,7 +47,7 @@ config.py-->
     img_height = 324
     img_weight = 324
     
-    
+以上解决了这个问题。
     
 From  :
 
@@ -61,6 +61,37 @@ You don't need to modify the input size, just change the pooling size on line 99
 3: https://github.com/creafz/pytorch-cnn-finetune/issues/4
 The problem is that some layers in a neural network (such as pooling layers or convolutions with stride > 1) reduce spatial dimensions of the activation map. So if the input image size is too small, you can't make a full forward pass through a network because activation map somewhere in the middle of the network will become too small.
 One possible solution to this problem is to increase the size of the input image (for example you can rescale it or pad image borders with zeros).
+
+
+6.
+
+产生第二个问题：   RuntimeError: The size of tensor a (20) must match the size of tensor b (21) at non-singleton dimension 3
+
+https://blog.csdn.net/lvhao92/article/details/79757031
+
+http://www.aibbt.com/a/47832.html
+
+https://github.com/marvis/pytorch-yolo2/issues/106
+
+
+
+
+
+
+注意：  这个  NasNet 到此结束。（问题量太大 ）
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
